@@ -1,0 +1,15 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "matrixConfig": {
+    "cols": 64,
+    "rows": 32,
+    "parallel": 2,
+    "disableHardwarePulsing": true
+  }
+}
