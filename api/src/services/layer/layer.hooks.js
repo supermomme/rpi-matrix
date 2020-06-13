@@ -1,15 +1,14 @@
-
-
 const createComponent = require('./hooks/create-component')
 const removeComponent = require('./hooks/remove-component')
+const addLayer = require('./hooks/add-layer')
 
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [],
-    update: [],
+    create: [ addLayer() ],
+    update: [ addLayer() ],
     patch: [],
     remove: []
   },

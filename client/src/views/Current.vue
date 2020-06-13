@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <canvas id="myCanvas" width="200" height="100"></canvas>
-    Momme ist kuhl: <pre>{{ pixels }}</pre>
+    <img v-if="current" :src="current.uri" style="background: #000;">
   </div>
 </template>
 
@@ -19,8 +17,8 @@ export default {
     }
   },
   computed: {
-    layers () {
-      return this.$store.getters['layer/list']
+    current () {
+      return this.$store.getters['image/get']('current')
     }
   },
   created () {
@@ -30,7 +28,7 @@ export default {
     async fetchData () {
       this.loading = true
       try {
-        const resp = await this.$store.dispatch('layer/find')
+        const resp = await this.$store.dispatch('image/get', 'current')
         console.log(resp)
       } catch (error) {
         console.error(error)

@@ -47,7 +47,9 @@
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "feathers-memory": "^4.1.0",
+    "feathers-nedb": "^5.1.0",
     "helmet": "^3.22.1",
+    "nedb": "^1.8.0",
     "rpi-led-matrix": "^1.10.0",
     "serve-favicon": "^2.5.0",
     "winston": "^3.2.1"

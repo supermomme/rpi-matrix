@@ -8,7 +8,7 @@ module.exports = (options = {}) => {
   return async context => {
     console.log(context.result)
     if (components[context.result.type.toLowerCase()] != undefined) {
-      context.app.$layerClass[context.result._id] = new components[context.result.type.toLowerCase()](context.app, context.result._id)
+      context.app.$layerClass[context.result._id] = new components[context.result.type.toLowerCase()](context.app, context.result)
     } else {
       logger.warn(`Class does not exist! skip ${context.result._id} with type ${context.result.type}`)
     }

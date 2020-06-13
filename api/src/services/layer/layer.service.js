@@ -1,10 +1,11 @@
 // Initializes the `layer` service on path `/layer`
 const { Layer } = require('./layer.class')
+const createModel = require('../../models/layer.model')
 const hooks = require('./layer.hooks')
 
 module.exports = function (app) {
   const options = {
-    id: '_id',
+    Model: createModel(app),
     paginate: app.get('paginate')
   }
 

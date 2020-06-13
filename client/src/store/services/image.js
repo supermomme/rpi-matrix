@@ -1,22 +1,22 @@
 /* eslint-disable no-useless-constructor */
 import feathersClient, { makeServicePlugin, BaseModel } from '../../api'
 
-class Pixel extends BaseModel {
+class Image extends BaseModel {
   constructor (data, options) {
     super(data, options)
   }
 
   // Required for $FeathersVuex plugin to work after production transpile.
-  static modelName = 'Pixel'
+  static modelName = 'Image'
   // Define default properties here
   static instanceDefaults () {
     return {
     }
   }
 }
-const servicePath = 'pixel'
+const servicePath = 'image'
 const servicePlugin = makeServicePlugin({
-  Model: Pixel,
+  Model: Image,
   service: feathersClient.service(servicePath),
   servicePath
 })

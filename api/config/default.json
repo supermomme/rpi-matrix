@@ -11,5 +11,6 @@
     "rows": 32,
     "parallel": 2,
     "disableHardwarePulsing": true
-  }
+  },
+  "nedb": "../data"
 }
