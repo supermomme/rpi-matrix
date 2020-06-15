@@ -9,15 +9,20 @@ const routes = [
     name: 'Current',
     component: () => import('../views/Current.vue')
   },
-  {
-    path: '/layer',
-    name: 'Layer',
-    component: () => import('../views/Layer.vue')
-  },
+  // {
+  //   path: '/layer',
+  //   name: 'Layer',
+  //   component: () => import('../views/Layer.vue')
+  // },
   {
     path: '/top',
     name: 'Top',
     component: () => import('../views/Top.vue')
+  },
+  {
+    path: '/layer',
+    name: 'LayerList',
+    component: () => import('../views/LayerList.vue')
   }
 ]
 

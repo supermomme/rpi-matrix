@@ -1,5 +1,8 @@
 module.exports = {
-  transpileDependencies: ['feathers-vuex'],
+  transpileDependencies: [
+    'feathers-vuex',
+    'vuetify'
+  ],
   devServer: {
     https: false,
     disableHostCheck: true,
@@ -10,7 +13,9 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'http://10.0.10.144:3030',
-        pathRewrite: { '^/api': '' }
+        pathRewrite: {
+          '^/api': ''
+        }
       }
     }
   },
