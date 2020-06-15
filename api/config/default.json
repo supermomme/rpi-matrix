@@ -10,7 +10,10 @@
     "cols": 64,
     "rows": 32,
     "parallel": 2,
-    "disableHardwarePulsing": true
+    "disableHardwarePulsing": true,
+    "brightness": 100
   },
+  "matrixWidth": 64,
+  "matrixHeight": 64,
   "nedb": "../data"
 }
