@@ -10,6 +10,11 @@ const routes = [
     component: () => import('../views/Current.vue')
   },
   {
+    path: '/layer',
+    name: 'Layer',
+    component: () => import('../views/Layer.vue')
+  },
+  {
     path: '/top',
     name: 'Top',
     component: () => import('../views/Top.vue')
