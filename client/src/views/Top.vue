@@ -19,8 +19,15 @@ export default {
     this.canvas.width = window.innerWidth
   },
   methods: {
-    startPainting () {
+    getCursorPosition (canvas, event) {
+      const rect = canvas.getBoundingClientRect()
+      const x = event.clientX - rect.left
+      const y = event.clientY - rect.top
+      return { x, y }
+    },
+    startPainting (e) {
       this.painting = true
+      this.draw(e)
       console.log(this.painting)
     },
     finishedPainting () {
@@ -29,7 +36,7 @@ export default {
     },
     draw (e) {
       if (!this.painting) return
-      console.log('Hello...Event is Working')
+      console.log(this.getCursorPosition(this.canvas, e))
     }
   }
 }
