@@ -26,6 +26,7 @@ module.exports = async function (app) {
     let canvas = createCanvas(app.$matrix.width(), app.$matrix.height())
     let ctx = canvas.getContext('2d')
     await app.service('image').create({ _id: 'current', uri: canvas.toDataURL()})
+    await app.service('image').create({ _id: 'currentLayer', uri: canvas.toDataURL()})
     await app.service('image').create({ _id: 'top', uri: canvas.toDataURL()})
 
     let topImage = new Image
@@ -35,27 +36,52 @@ module.exports = async function (app) {
         topImage.src = message.uri
       }
     })
+    let currentLayerUri = null
+    let currentUri = null
+    let currentUpdate = false
+
+    setInterval(() => {
+      patchImages()
+        .catch(err => console.error(err))
+    }, 100)
 
     // eslint-disable-next-line no-unused-vars
     app.$matrix.afterSync((mat, dt, t) => {
-      setTimeout(() => update(), 1000)
+      setTimeout(() => update(), 1)
     })
     app.$matrix.sync()
+
     const update = () => {
-      console.time('Update')
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       const keys = Object.keys(app.$layerClass).sort((f, s) => (app.$layerClass[f].layer.layer > app.$layerClass[s].layer.layer) ? 1 : -1)
       for (let k = 0; k < keys.length; k++) {
         app.$layerClass[keys[k]].drawToCtx(ctx)
       }
+
+      let newCurrentLayerUri = canvas.toDataURL()
+      if (currentLayerUri !== newCurrentLayerUri) {
+        currentLayerUri = newCurrentLayerUri
+        currentUpdate = true
+      }
+
       ctx.drawImage(topImage, 0, 0)
 
-      app.$matrix.drawBuffer(canvasToBuffer(), canvas.width, canvas.height)
+      let newCurrentUri = canvas.toDataURL()
+      if (currentUri !== newCurrentUri) {
+        currentUri = newCurrentUri
+        currentUpdate = true
+      }
 
-      app.service('image').patch('current', { uri: canvas.toDataURL()})
-        .catch(err => console.error(err))
+      app.$matrix.drawBuffer(canvasToBuffer(), canvas.width, canvas.height)
       app.$matrix.sync()
-      console.timeEnd('Update')
+    }
+
+    const patchImages = async () => {
+      if (currentUpdate) {
+        currentUpdate = false
+        await app.service('image').patch('currentLayer', { uri: currentLayerUri })
+        await app.service('image').patch('current', { uri: currentUri })
+      }
     }
 
     const canvasToBuffer = () => {
