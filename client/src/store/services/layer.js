@@ -11,6 +11,7 @@ class Layer extends BaseModel {
   // Define default properties here
   static instanceDefaults () {
     return {
+      name: ''
     }
   }
 }
